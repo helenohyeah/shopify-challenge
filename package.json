@@ -1,0 +1,20 @@
+{
+  "name": "shopify-challenge",
+  "version": "1.0.0",
+  "description": "Submission for Shopify's 2021 Intership Challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "python3 -m http.server 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helenohyeah/shopify-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helenohyeah/shopify-challenge/issues"
+  },
+  "homepage": "https://github.com/helenohyeah/shopify-challenge#readme"
+}

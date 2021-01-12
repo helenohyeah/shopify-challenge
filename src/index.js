@@ -15,10 +15,11 @@ function Search() {
   const [searchValue, setSearchValue] = React.useState('');
   const [results, setResults] = React.useState([]);
   const [errMsg, setErrMsg] = React.useState('');
+  const [nominations, setNominations] = React.useState({});
 
   // search using OMDB api when search terms change
   React.useEffect(() => {
-    axios.get(`http://www.omdbapi.com/`, {
+    axios.get('http://www.omdbapi.com/', {
       params: {
         apikey: config.OMDB_API_KEY,
         s: searchValue
@@ -26,9 +27,11 @@ function Search() {
     })
       .then(res => {
         console.log(res.data);
+        // set search results and clear error message if response came back True
         if (res.data.Response === 'True') {
           setResults(res.data.Search);
           setErrMsg('');
+        // clear search results and set error message if response came back False
         } else {
           setResults([]);
           setErrMsg(res.data.Error);
@@ -52,18 +55,22 @@ function Search() {
         searchValue={searchValue}
         data={results}
         error={errMsg}
+        nominations={nominations}
+        setNominations={setNominations}
       />
+      <Nominations />
     </div>
   );
 }
 
 function Results(props) {
 
-  console.log(props);
+  // disable nominate button if movie is nominated
+  const disableNominate = (id) => props.nominations[id] === true ? true : false;
 
   const title = props.searchValue.length > 0 ? `Results for "${props.searchValue}"` : 'Results';
-  const results = props.data.map((movie, index) => {
-    return <li key={index}>{movie.Title} ({movie.Year})</li>;
+  const results = props.data.map(movie => {
+    return <li key={movie.imdbID}>{movie.Title} ({movie.Year}) <Nominate id={movie.imdbID} setNominations={props.setNominations} disabled={disableNominate(movie.imdbID)} /></li>;
   });
 
   return (
@@ -75,6 +82,17 @@ function Results(props) {
         {results && results}
       </ul>
     </div>
+  );
+}
+
+function Nominate(props) {
+  return (
+    <button
+      onClick={() => props.setNominations(prev => {
+        return { ...prev, [props.id]: true }
+      })}
+      disabled={props.disabled}
+    >Nominate</button>
   );
 }
 
@@ -90,7 +108,6 @@ ReactDOM.render(
   <div className="container">
     <Header />
     <Search />
-    <Nominations />
   </div>
   ,
   document.getElementById('root')

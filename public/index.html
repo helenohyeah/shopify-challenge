@@ -18,6 +18,9 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 
+  <!-- Load Axios. -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
   <!-- Load React. -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
@@ -25,10 +28,10 @@
   
   <!-- Load Babel for JSX.-->
   <!-- Note: when deploying, convert project to use JSX preprocessor. -->
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.12.12/babel.min.js"></script>
 
   <!-- Load React Component. -->
-  <script src="/src/index.js" type="text/babel"></script>
+  <script src="/src/index.js" type="text/babel" data-type="module"></script>
 </body>
 
 </html>

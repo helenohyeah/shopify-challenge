@@ -1,5 +1,6 @@
 'use strict';
 
+import { config } from "../config.js";
 
 function Header() {
   return (
@@ -12,6 +13,25 @@ function Header() {
 function Search() {
 
   const [searchValue, setSearchValue] = React.useState('');
+  const [result, setResult] = React.useState([]);
+  // console.log(config.OMDB_API_KEY);
+
+  // search using OMDB api when search terms change
+  React.useEffect(() => {
+    axios.get(`http://www.omdbapi.com/`, {
+      params: {
+        apikey: config.OMDB_API_KEY,
+        s: searchValue
+      }
+    })
+      .then(res => {
+        // console.log(res.data);
+        if (res.data.Response === 'True') setResult(res.data.Search);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [searchValue]);
 
   return (
     <div className="search">
@@ -22,11 +42,15 @@ function Search() {
         value={searchValue}
         onChange={e => setSearchValue(e.target.value)}
       />
+      <Results
+        data={result}
+      />
     </div>
   );
 }
 
-function Results() {
+function Results(props) {
+  console.log(props.data);
   return (
     <div className="results">
       <h2>Results</h2>
@@ -46,7 +70,6 @@ ReactDOM.render(
   <div className="container">
     <Header />
     <Search />
-    <Results />
     <Nominations />
   </div>
   ,

@@ -60,6 +60,7 @@ function Search() {
       />
       <Nominations
         nominations={nominations}
+        setNominations={setNominations}
       />
     </div>
   );
@@ -109,9 +110,10 @@ function NominateBtn(props) {
 
 function Nominations(props) {
   const nominationsList = props.nominations.map(nomination => {
+    const { id, title, year } = nomination;
     return (
-      <li key={nomination.id}>
-        {nomination.title} ({nomination.year}) <RemoveBtn />
+      <li key={id}>
+        {title} ({year}) <RemoveBtn id={id} setNominations={props.setNominations} />
       </li>
     );
   });
@@ -128,7 +130,9 @@ function Nominations(props) {
 
 function RemoveBtn(props) {
   return (
-    <button>Remove</button>
+    <button
+      onClick={() => props.setNominations(prev => prev.filter(nomination => nomination.id !== props.id))}
+    >Remove</button>
   );
 }
 

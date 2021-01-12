@@ -25,11 +25,12 @@ function Search() {
       }
     })
       .then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         if (res.data.Response === 'True') {
           setResults(res.data.Search);
           setErrMsg('');
         } else {
+          setResults([]);
           setErrMsg(res.data.Error);
         }
       })
@@ -57,13 +58,13 @@ function Search() {
 }
 
 function Results(props) {
+
   console.log(props);
+
   const title = props.searchValue.length > 0 ? `Results for "${props.searchValue}"` : 'Results';
   const results = props.data.map((movie, index) => {
     return <li key={index}>{movie.Title} ({movie.Year})</li>;
   });
-
-  // console.log(props.data.length);
 
   return (
     <div className="results">

@@ -10,7 +10,7 @@ function Header() {
   );
 }
 
-function Search() {
+function Main() {
 
   const [searchValue, setSearchValue] = React.useState('');
   const [results, setResults] = React.useState([]);
@@ -43,14 +43,12 @@ function Search() {
   }, [searchValue]);
 
   return (
-    <div className="search">
-      <label htmlFor="search">Movie Title:</label>
-      <input 
-        type="text"
-        name="search"
-        value={searchValue}
-        onChange={e => setSearchValue(e.target.value)}
+    <main>
+      <SearchBar 
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
+      {nominations.length >= 5 && <Banner />}
       <Results
         searchValue={searchValue}
         data={results}
@@ -62,16 +60,34 @@ function Search() {
         nominations={nominations}
         setNominations={setNominations}
       />
+    </main>
+  );
+}
+
+function SearchBar(props) {
+  return (
+    <div className="search-bar">
+      <label htmlFor="search">Movie Title:</label>
+      <input 
+        type="text"
+        name="search"
+        value={props.searchValue}
+        onChange={e => props.setSearchValue(e.target.value)}
+      />
     </div>
   );
 }
 
+function Banner() {
+  return <div className="banner">You nominated 5 movies - You're done! Check back in to see who won.</div>;
+}
+
 function Results(props) {
 
-  // returns index of nomination given movie id
-  const findIndexOfNomination = id => props.nominations.findIndex(nomination => nomination.id === id);
-  // checks for nomination to disable nominate button
-  const checkForNomination = id => findIndexOfNomination(id) !== -1 ? true : false;
+  // checks for movie in nomination list to disable or enable nominate button
+  const checkForNomination = id => props.nominations.some(nomination => nomination.id === id);
+  // disable nomination button if the movie is already nominated or if user has 5 nominations
+  const disableNomination = id => checkForNomination(id) || props.nominations.length === 5;
 
   const title = props.searchValue.length > 0 ? `Results for "${props.searchValue}"` : 'Results';
 
@@ -82,7 +98,7 @@ function Results(props) {
 
     return (
       <li key={id}>
-        {title} ({year}) <NominateBtn key={id} movie={{ id, title, year }} setNominations={props.setNominations} disabled={checkForNomination(id)} />
+        {title} ({year}) <NominateBtn key={id} movie={{ id, title, year }} setNominations={props.setNominations} disabled={disableNomination(id)} />
       </li>
     );
   });
@@ -139,7 +155,7 @@ function RemoveBtn(props) {
 ReactDOM.render(
   <div className="container">
     <Header />
-    <Search />
+    <Main />
   </div>
   ,
   document.getElementById('root')

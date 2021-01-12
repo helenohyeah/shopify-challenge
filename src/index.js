@@ -15,7 +15,7 @@ function Search() {
   const [searchValue, setSearchValue] = React.useState('');
   const [results, setResults] = React.useState([]);
   const [errMsg, setErrMsg] = React.useState('');
-  const [nominations, setNominations] = React.useState({});
+  const [nominations, setNominations] = React.useState([]);
 
   // search using OMDB api when search terms change
   React.useEffect(() => {
@@ -58,19 +58,32 @@ function Search() {
         nominations={nominations}
         setNominations={setNominations}
       />
-      <Nominations />
+      <Nominations
+        nominations={nominations}
+      />
     </div>
   );
 }
 
 function Results(props) {
 
-  // disable nominate button if movie is nominated
-  const disableNominate = (id) => props.nominations[id] === true ? true : false;
+  // returns index of nomination given movie id
+  const findIndexOfNomination = id => props.nominations.findIndex(nomination => nomination.id === id);
+  // checks for nomination to disable nominate button
+  const checkForNomination = id => findIndexOfNomination(id) !== -1 ? true : false;
 
   const title = props.searchValue.length > 0 ? `Results for "${props.searchValue}"` : 'Results';
-  const results = props.data.map(movie => {
-    return <li key={movie.imdbID}>{movie.Title} ({movie.Year}) <Nominate id={movie.imdbID} setNominations={props.setNominations} disabled={disableNominate(movie.imdbID)} /></li>;
+
+  const resultsList = props.data.map(movie => {
+    const id = movie.imdbID;
+    const title = movie.Title;
+    const year = movie.Year;
+
+    return (
+      <li key={id}>
+        {title} ({year}) <NominateBtn key={id} movie={{ id, title, year }} setNominations={props.setNominations} disabled={checkForNomination(id)} />
+      </li>
+    );
   });
 
   return (
@@ -79,28 +92,43 @@ function Results(props) {
       <ul>
         {!props.searchValue && <p>Type something to search</p>}
         {props.searchValue && props.error && <p>{props.error}</p>}
-        {results && results}
+        {resultsList && resultsList}
       </ul>
     </div>
   );
 }
 
-function Nominate(props) {
+function NominateBtn(props) {
   return (
     <button
-      onClick={() => props.setNominations(prev => {
-        return { ...prev, [props.id]: true }
-      })}
+      onClick={() => props.setNominations(prev => [...prev, props.movie])}
       disabled={props.disabled}
     >Nominate</button>
   );
 }
 
-function Nominations() {
+function Nominations(props) {
+  const nominationsList = props.nominations.map(nomination => {
+    return (
+      <li key={nomination.id}>
+        {nomination.title} ({nomination.year}) <RemoveBtn />
+      </li>
+    );
+  });
+
   return (
     <div className="nominations">
       <h2>Nominations</h2>
+      <ul>
+        {nominationsList}
+      </ul>
     </div>
+  );
+}
+
+function RemoveBtn(props) {
+  return (
+    <button>Remove</button>
   );
 }
 

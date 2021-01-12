@@ -14,7 +14,6 @@ function Search() {
 
   const [searchValue, setSearchValue] = React.useState('');
   const [result, setResult] = React.useState([]);
-  // console.log(config.OMDB_API_KEY);
 
   // search using OMDB api when search terms change
   React.useEffect(() => {
@@ -25,7 +24,6 @@ function Search() {
       }
     })
       .then(res => {
-        // console.log(res.data);
         if (res.data.Response === 'True') setResult(res.data.Search);
       })
       .catch(err => {
@@ -43,6 +41,7 @@ function Search() {
         onChange={e => setSearchValue(e.target.value)}
       />
       <Results
+        searchValue={searchValue}
         data={result}
       />
     </div>
@@ -51,9 +50,16 @@ function Search() {
 
 function Results(props) {
   console.log(props.data);
+  const results = props.data.map(movie => {
+    return <li>{movie.Title} ({movie.Year})</li>;
+  });
+
   return (
     <div className="results">
-      <h2>Results</h2>
+      <h2>Results for {props.searchValue}</h2>
+      <ul>
+        {results}
+      </ul>
     </div>
   );
 }

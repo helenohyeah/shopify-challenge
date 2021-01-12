@@ -13,7 +13,8 @@ function Header() {
 function Search() {
 
   const [searchValue, setSearchValue] = React.useState('');
-  const [result, setResult] = React.useState([]);
+  const [results, setResults] = React.useState([]);
+  const [errMsg, setErrMsg] = React.useState('');
 
   // search using OMDB api when search terms change
   React.useEffect(() => {
@@ -24,7 +25,13 @@ function Search() {
       }
     })
       .then(res => {
-        if (res.data.Response === 'True') setResult(res.data.Search);
+        // console.log(res.data);
+        if (res.data.Response === 'True') {
+          setResults(res.data.Search);
+          setErrMsg('');
+        } else {
+          setErrMsg(res.data.Error);
+        }
       })
       .catch(err => {
         console.log(err);
@@ -42,23 +49,29 @@ function Search() {
       />
       <Results
         searchValue={searchValue}
-        data={result}
+        data={results}
+        error={errMsg}
       />
     </div>
   );
 }
 
 function Results(props) {
-  console.log(props.data);
-  const results = props.data.map(movie => {
-    return <li>{movie.Title} ({movie.Year})</li>;
+  console.log(props);
+  const title = props.searchValue.length > 0 ? `Results for "${props.searchValue}"` : 'Results';
+  const results = props.data.map((movie, index) => {
+    return <li key={index}>{movie.Title} ({movie.Year})</li>;
   });
+
+  // console.log(props.data.length);
 
   return (
     <div className="results">
-      <h2>Results for {props.searchValue}</h2>
+      <h2>{title}</h2>
       <ul>
-        {results}
+        {!props.searchValue && <p>Type something to search</p>}
+        {props.searchValue && props.error && <p>{props.error}</p>}
+        {results && results}
       </ul>
     </div>
   );

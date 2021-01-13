@@ -19,7 +19,7 @@ function Main() {
 
   // search using OMDB api when search terms change
   React.useEffect(() => {
-    axios.get('http://www.omdbapi.com/', {
+    axios.get('https://www.omdbapi.com/', {
       params: {
         apikey: config.OMDB_API_KEY,
         s: searchValue

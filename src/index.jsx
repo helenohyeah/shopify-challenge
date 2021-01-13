@@ -26,7 +26,6 @@ function Main() {
       }
     })
       .then(res => {
-        console.log(res.data);
         // set search results and clear error message if response came back True
         if (res.data.Response === 'True') {
           setResults(res.data.Search);

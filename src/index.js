@@ -45,20 +45,20 @@ function Main() {
   return (
     <main>
       <SearchBar 
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
+        value={searchValue}
+        onValueChange={setSearchValue}
       />
       {nominations.length >= 5 && <Banner />}
       <Results
         searchValue={searchValue}
-        data={results}
+        results={results}
         error={errMsg}
         nominations={nominations}
-        setNominations={setNominations}
+        onNomination={setNominations}
       />
       <Nominations
         nominations={nominations}
-        setNominations={setNominations}
+        onNomination={setNominations}
       />
     </main>
   );
@@ -71,8 +71,8 @@ function SearchBar(props) {
       <input 
         type="text"
         name="search"
-        value={props.searchValue}
-        onChange={e => props.setSearchValue(e.target.value)}
+        value={props.value}
+        onChange={e => props.onValueChange(e.target.value)}
       />
     </div>
   );
@@ -84,21 +84,21 @@ function Banner() {
 
 function Results(props) {
 
-  // checks for movie in nomination list to disable or enable nominate button
-  const checkForNomination = id => props.nominations.some(nomination => nomination.id === id);
-  // disable nomination button if the movie is already nominated or if user has 5 nominations
-  const disableNomination = id => checkForNomination(id) || props.nominations.length === 5;
+  // check if movie is nominated
+  const isNominated = id => props.nominations.some(nomination => nomination.id === id);
+  // check to disable nominate button, true if movie is nominated or user has 5 nominations
+  const isDisabled = id => isNominated(id) || props.nominations.length === 5;
 
   const title = props.searchValue.length > 0 ? `Results for "${props.searchValue}"` : 'Results';
 
-  const resultsList = props.data.map(movie => {
+  const resultsList = props.results.map(movie => {
     const id = movie.imdbID;
     const title = movie.Title;
     const year = movie.Year;
 
     return (
       <li key={id}>
-        {title} ({year}) <NominateBtn key={id} movie={{ id, title, year }} setNominations={props.setNominations} disabled={disableNomination(id)} />
+        {title} ({year}) <NominateBtn movie={{ id, title, year }} onNomination={props.onNomination} disabled={isDisabled(id)} />
       </li>
     );
   });
@@ -106,11 +106,9 @@ function Results(props) {
   return (
     <div className="results">
       <h2>{title}</h2>
-      <ul>
-        {!props.searchValue && <p>Type something to search</p>}
-        {props.searchValue && props.error && <p>{props.error}</p>}
-        {resultsList && resultsList}
-      </ul>
+      {!props.searchValue && <p>Type in the movie title you want to nominate</p>}
+      {props.searchValue && props.error && <p>{props.error}</p>}
+      {resultsList && <ul>{resultsList}</ul>}
     </div>
   );
 }
@@ -118,7 +116,7 @@ function Results(props) {
 function NominateBtn(props) {
   return (
     <button
-      onClick={() => props.setNominations(prev => [...prev, props.movie])}
+      onClick={() => props.onNomination(prev => [...prev, props.movie])}
       disabled={props.disabled}
     >Nominate</button>
   );
@@ -129,7 +127,7 @@ function Nominations(props) {
     const { id, title, year } = nomination;
     return (
       <li key={id}>
-        {title} ({year}) <RemoveBtn id={id} setNominations={props.setNominations} />
+        {title} ({year}) <RemoveBtn id={id} onNomination={props.onNomination} />
       </li>
     );
   });
@@ -147,13 +145,13 @@ function Nominations(props) {
 function RemoveBtn(props) {
   return (
     <button
-      onClick={() => props.setNominations(prev => prev.filter(nomination => nomination.id !== props.id))}
+      onClick={() => props.onNomination(prev => prev.filter(nomination => nomination.id !== props.id))}
     >Remove</button>
   );
 }
 
 ReactDOM.render(
-  <div className="container">
+  <div>
     <Header />
     <Main />
   </div>

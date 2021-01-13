@@ -67,19 +67,19 @@ function Main() {
 function SearchBar(props) {
   return (
     <div className="search box">
-      <label htmlFor="search">Movie Title:</label>
       <input 
-        type="text"
+        type="search"
         name="search"
         value={props.value}
         onChange={e => props.onValueChange(e.target.value)}
+        placeholder="Search by movie title"
       />
     </div>
   );
 }
 
 function Banner() {
-  return <div className="banner">You nominated 5 movies - You're done! Check back in to see who won.</div>;
+  return <div className="banner box"><p>You nominated 5 movies - You're done! Check back in to see who won.</p></div>;
 }
 
 function Results(props) {
@@ -127,7 +127,7 @@ function Nominations(props) {
     const { id, title, year } = nomination;
     return (
       <li key={id}>
-        {title} ({year}) <RemoveBtn id={id} onNomination={props.onNomination} />
+        {title} ({year}) <RemoveBtn movieId={id} onNomination={props.onNomination} />
       </li>
     );
   });
@@ -145,7 +145,7 @@ function Nominations(props) {
 function RemoveBtn(props) {
   return (
     <button
-      onClick={() => props.onNomination(prev => prev.filter(nomination => nomination.id !== props.id))}
+      onClick={() => props.onNomination(prev => prev.filter(nomination => nomination.id !== props.movieId))}
     >Remove</button>
   );
 }

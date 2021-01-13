@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "python3 -m http.server 3000 -d ./public",
-    "dev": "npx babel --watch src --out-dir public/build",
-    "build": "npx babel src --out-dir public/build"
+    "dev": "npx babel --watch src --out-dir public/build & ./node_modules/.bin/sass --watch --poll --no-source-map src/scss/:public/build",
+    "build": "npx babel src --out-dir public/build && ./node_modules/.bin/sass --no-source-map src/scss/:public/build"
   },
   "repository": {
     "type": "git",

@@ -44,7 +44,7 @@ function Main() {
 
   return (
     <main>
-      <SearchBar 
+      <SearchBar
         value={searchValue}
         onValueChange={setSearchValue}
       />
@@ -66,7 +66,7 @@ function Main() {
 
 function SearchBar(props) {
   return (
-    <div className="search-bar">
+    <div className="search box">
       <label htmlFor="search">Movie Title:</label>
       <input 
         type="text"
@@ -104,7 +104,7 @@ function Results(props) {
   });
 
   return (
-    <div className="results">
+    <div className="results box">
       <h2>{title}</h2>
       {!props.searchValue && <p>Type in the movie title you want to nominate</p>}
       {props.searchValue && props.error && <p>{props.error}</p>}
@@ -133,7 +133,7 @@ function Nominations(props) {
   });
 
   return (
-    <div className="nominations">
+    <div className="nominations box">
       <h2>Nominations</h2>
       <ul>
         {nominationsList}

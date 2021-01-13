@@ -4,8 +4,9 @@
   "description": "Submission for Shopify's 2021 Intership Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "python3 -m http.server 3000",
-    "babel:watch": "npx babel --watch src --out-dir src"
+    "start": "python3 -m http.server 3000 -d ./public",
+    "dev": "npx babel --watch src --out-dir public/build",
+    "build": "npx babel src --out-dir public/build"
   },
   "repository": {
     "type": "git",

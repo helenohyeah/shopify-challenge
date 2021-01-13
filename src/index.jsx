@@ -1,6 +1,6 @@
 'use strict';
 
-import { config } from "../config.js";
+import { config } from "./config.js";
 
 function Header() {
   return (

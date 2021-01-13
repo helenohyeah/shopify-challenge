@@ -10,12 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="/public/css/reset.css">
-  <link rel="stylesheet" href="/public/css/styles.css">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="./build/styles.css">
 
 </head>
 
@@ -28,15 +23,11 @@
 
   <!-- Load React. -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-  
-  <!-- Load Babel for JSX.-->
-  <!-- Note: when deploying, convert project to use JSX preprocessor. -->
-  <script src="https://unpkg.com/@babel/standalone@7.12.12/babel.min.js"></script>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 
-  <!-- Load React Component. -->
-  <script src="/src/index.js" type="text/babel" data-type="module"></script>
+  <!-- Load React Components. -->
+  <script src="/build/index.js" type="module"></script>
 </body>
 
 </html>

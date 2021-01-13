@@ -4,7 +4,9 @@
   "description": "Submission for Shopify's 2021 Intership Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "python3 -m http.server 3000"
+    "start": "python3 -m http.server 3000 -d ./public",
+    "dev": "npx babel --watch src --out-dir public/build & ./node_modules/.bin/sass --watch --poll --no-source-map src/scss/:public/build",
+    "build": "npx babel src --out-dir public/build && ./node_modules/.bin/sass --no-source-map src/scss/:public/build"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,11 @@
     "url": "https://github.com/helenohyeah/shopify-challenge/issues"
   },
   "homepage": "https://github.com/helenohyeah/shopify-challenge#readme",
-  "dependencies": {}
+  "dependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "sass": "^1.32.4"
+  },
+  "devDependencies": {}
 }

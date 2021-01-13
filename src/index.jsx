@@ -1,6 +1,6 @@
 'use strict';
 
-import { config } from "../config.js";
+import { config } from "./config.js";
 
 function Header() {
   return (
@@ -19,14 +19,13 @@ function Main() {
 
   // search using OMDB api when search terms change
   React.useEffect(() => {
-    axios.get('http://www.omdbapi.com/', {
+    axios.get('https://www.omdbapi.com/', {
       params: {
         apikey: config.OMDB_API_KEY,
         s: searchValue
       }
     })
       .then(res => {
-        console.log(res.data);
         // set search results and clear error message if response came back True
         if (res.data.Response === 'True') {
           setResults(res.data.Search);

@@ -89,3 +89,21 @@ li {
   margin: 0.5rem;
   padding-left: 0.5rem;
 }
+
+button {
+  font-size: 0.8rem;
+  border: 1px solid #dfdfdf;
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.5rem;
+}
+
+button:hover,
+button:active {
+  cursor: pointer;
+  background-color: #dfdfdf;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #c7c7c7;
+}

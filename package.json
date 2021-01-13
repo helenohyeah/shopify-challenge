@@ -4,7 +4,8 @@
   "description": "Submission for Shopify's 2021 Intership Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "python3 -m http.server 3000"
+    "start": "python3 -m http.server 3000",
+    "babel:watch": "npx babel --watch src --out-dir src"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,12 @@
     "url": "https://github.com/helenohyeah/shopify-challenge/issues"
   },
   "homepage": "https://github.com/helenohyeah/shopify-challenge#readme",
-  "dependencies": {}
+  "dependencies": {
+    "babel-cli": "^6.26.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-react": "^7.12.10"
+  }
 }

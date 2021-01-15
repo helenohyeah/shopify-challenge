@@ -3,6 +3,8 @@ My submission for Shopify's Web Developer Intership Challenge
 
 Demo: [https://shopify-challenge-2021.netlify.app/](https://shopify-challenge-2021.netlify.app/)
 
+Build in React using Axios and Sass
+
 ## The Challenge
 
 Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies.
@@ -33,3 +35,12 @@ Improvements I'd like to work on next.
 - [ ] Animations
 - [ ] Save nomination list if user leaves the page
 - [ ] Shareable links
+- [ ] Automated testing
+
+## How to Run Locally
+
+1. Install all dependencies using `npm install`.
+2. Compile a build and run a local server using `npm start`.
+3. Open the web app on [http://localhost:3000/](http://localhost:3000/)
+
+Note: To change portsm open package.json and change the 3000 in the serve script to your chosen port

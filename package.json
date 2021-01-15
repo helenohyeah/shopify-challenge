@@ -4,8 +4,9 @@
   "description": "Submission for Shopify's 2021 Intership Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "python3 -m http.server 3000 -d ./public",
-    "dev": "npx babel --watch src --out-dir public/build --verbose & ./node_modules/.bin/sass --watch --poll --no-source-map src/scss/:public/build",
+    "start": "npm run build && npm run serve",
+    "serve": "python3 -m http.server 3000 -d ./public",
+    "dev": "npx babel --watch src --out-dir public/build --verbose & ./node_modules/.bin/sass --watch --poll --no-source-map src/scss/:public/build & npm run serve",
     "build": "npx babel src --out-dir public/build && ./node_modules/.bin/sass --no-source-map src/scss/:public/build"
   },
   "repository": {

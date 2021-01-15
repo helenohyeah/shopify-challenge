@@ -1,7 +1,8 @@
 export default function Header() {
   return (
     <header>
-      <h1>The Shoppies</h1>
+      <h3>The</h3>
+      <h1>Shoppies</h1>
     </header>
   );
 }

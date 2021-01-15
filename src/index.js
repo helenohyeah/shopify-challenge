@@ -8,7 +8,6 @@ import Main from './components/Main.js';
 
 ReactDOM.render(
   <div>
-    <div id="carpet"></div>
     <Header />
     <Main 
       config={config}

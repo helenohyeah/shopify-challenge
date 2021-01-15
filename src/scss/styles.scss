@@ -1,5 +1,6 @@
 @import 'reset';
 @import 'variables';
+@import 'animations';
 
 body {
   font-size: 16px;
@@ -19,6 +20,8 @@ header {
   h1 {
     font-weight: bold;
     font-size: 3rem;
+    position: relative;
+    display: inline-block;
   }
 
   h3::before {
@@ -34,6 +37,30 @@ header {
   h3 {
     font-weight: bold;
     font-size: 1rem;
+  }
+
+  img.star {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+  }
+  
+  #star-3 {
+    left: -2.5rem;
+    top: -50%;
+    animation: glitter 4s ease-in-out 0s infinite ;
+  }
+
+  #star-1 {
+    right: -3.5rem;
+    top: 0%;
+    animation: glitter 3.6s ease-in 0s infinite normal;
+  }
+
+  #star-2 {
+    right: -2.5rem;
+    top: 50%;
+    animation: glitter 3.8s ease-out 0s infinite normal;
   }
 }
 

@@ -6,7 +6,7 @@ import Nominations from './Nominations.js';
 // Hooks
 import useSearch from '../hooks/useSearch.js';
 
-export default function Main(props) {
+export default function Main() {
 
   const [searchValue, setSearchValue] = React.useState('');
   const [results, setResults] = React.useState([]);
@@ -14,9 +14,23 @@ export default function Main(props) {
   const [nominations, setNominations] = React.useState([]);
   const { handleSearch } = useSearch();
 
-  // search using OMDB api when search terms change
+  // update results when search terms change
   React.useEffect(() => {
-    handleSearch(searchValue, setResults, setErrMsg);
+    // wait for user to stop typing before making api call
+    const debounceTimer = setTimeout(() => {
+      handleSearch(searchValue)
+        .then(res => {
+          if(res.data.Response === 'True') {
+            setResults(res.data.Search);
+            setErrMsg('');
+          } else {
+            setResults([]);
+            setErrMsg(res.data.Error);
+          }
+        });
+    }, 1000);
+
+    return () => clearTimeout(debounceTimer);
   }, [searchValue]);
 
   return (

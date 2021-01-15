@@ -1,8 +1,10 @@
 // Components
 import SearchBar from './SearchBar.js';
-import Banner from './Banner.js';
 import Results from './Results.js';
 import Nominations from './Nominations.js';
+
+// Hooks
+import useSearch from '../hooks/useSearch.js';
 
 export default function Main(props) {
 
@@ -10,31 +12,11 @@ export default function Main(props) {
   const [results, setResults] = React.useState([]);
   const [errMsg, setErrMsg] = React.useState('');
   const [nominations, setNominations] = React.useState([]);
-
-  const config = props.config;
+  const { handleSearch } = useSearch();
 
   // search using OMDB api when search terms change
   React.useEffect(() => {
-    axios.get('https://www.omdbapi.com/', {
-      params: {
-        apikey: config.OMDB_API_KEY,
-        s: searchValue
-      }
-    })
-      .then(res => {
-        // set search results and clear error message if response came back True
-        if (res.data.Response === 'True') {
-          setResults(res.data.Search);
-          setErrMsg('');
-        // clear search results and set error message if response came back False
-        } else {
-          setResults([]);
-          setErrMsg(res.data.Error);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    handleSearch(searchValue, setResults, setErrMsg);
   }, [searchValue]);
 
   return (

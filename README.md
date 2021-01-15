@@ -30,7 +30,7 @@ Remove a nominee from the nomination list
 
 Improvements I'd like to work on next.
 
-- [ ] Nicer custom design
+- [x] Nicer custom design
 - [ ] Debounce search call
 - [ ] Animations
 - [ ] Save nomination list if user leaves the page

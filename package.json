@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run serve",
-    "serve": "python3 -m http.server 3000 -d ./public",
+    "serve": "./node_modules/.bin/http-server -o",
     "dev": "npx babel --watch src --out-dir public/build --verbose & ./node_modules/.bin/sass --watch --poll --no-source-map src/scss/:public/build & npm run serve",
     "build": "npx babel src --out-dir public/build && ./node_modules/.bin/sass --no-source-map src/scss/:public/build"
   },
@@ -24,7 +24,7 @@
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
+    "http-server": "^0.12.3",
     "sass": "^1.32.4"
-  },
-  "devDependencies": {}
+  }
 }

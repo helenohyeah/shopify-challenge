@@ -41,6 +41,6 @@ Improvements I'd like to work on next.
 
 1. Install all dependencies using `npm install`.
 2. Compile a build and run a local server using `npm start`.
-3. Open the web app on [http://localhost:3000/](http://localhost:3000/)
+3. It should automatically open your browser to [http://localhost:8080/](http://localhost:8080/)
 
-Note: To change portsm open package.json and change the 3000 in the serve script to your chosen port
+Note: To change ports open package.json and add `--port [port number]` to the end of the serve script.

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps:wght@400;700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 $header-font: 'Epilogue', sans-serif;
@@ -11,5 +11,8 @@ $background-color:#1b1e23;
 $border-color: #dfdfdf;
 $shadow-color: #c7c7c7;
 
+$success-bg-color: #D4EDDA;
+$success-font-color: #2C573A;
+$success-border-color: #C3E6CB;
 $disabled-color: #c7c7c7;
 $hover-color: #dfdfdf;

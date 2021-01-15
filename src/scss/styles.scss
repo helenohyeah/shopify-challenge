@@ -156,3 +156,11 @@ button:disabled {
   cursor: not-allowed;
   background-color: $shadow-color;
 }
+
+.banner {
+  background-color: $success-bg-color;
+  color: $success-font-color;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid $success-border-color;
+}

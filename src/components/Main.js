@@ -43,7 +43,6 @@ export default function Main(props) {
         value={searchValue}
         onValueChange={setSearchValue}
       />
-      {nominations.length >= 5 && <Banner />}
       <Results
         searchValue={searchValue}
         results={results}

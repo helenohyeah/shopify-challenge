@@ -5,7 +5,7 @@ export default function Results(props) {
   // check to disable nominate button, true if movie is nominated or user has 5 nominations
   const isDisabled = id => isNominated(id) || props.nominations.length === 5;
 
-  const title = props.searchValue.length > 0 ? `Results for "${props.searchValue}"` : 'Results';
+  const heading = props.searchValue.length > 0 ? `Search Results for "${props.searchValue}"` : 'Search Results';
 
   const resultsList = props.results.map(movie => {
     const id = movie.imdbID;
@@ -21,8 +21,8 @@ export default function Results(props) {
 
   return (
     <div className="results box">
-      <h2>{title}</h2>
-      {!props.searchValue && <p>Type in the movie title you want to nominate</p>}
+      <h2>{heading}</h2>
+      {!props.searchValue && <p>Start searching for movies you want to nominate!</p>}
       {props.searchValue && props.error && <p>{props.error}</p>}
       {resultsList && <ul>{resultsList}</ul>}
     </div>

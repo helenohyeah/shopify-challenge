@@ -6,6 +6,14 @@ body {
   font-size: 16px;
   background-color: $background-color;
   font-family: $primary-font;
+}
+
+// Page Layout
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   margin-left: calc(100vw - 100%);
 }
 
@@ -66,12 +74,11 @@ header {
 }
 
 main {
-
   // Flex Grid Layout
 
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto 1fr;
   width: 80vw;
   margin: 0 auto;
 
@@ -79,22 +86,33 @@ main {
     grid-column-start: 1;
     grid-column-end: span 2;
     grid-row-start: 1;
-  }
-  
-  .banner {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-    grid-row-start: 2;
+
+    // Search Bar 
+
+    input {
+      padding: 0.5rem;
+      padding-left: 2rem;
+      width: 100%;
+      border: 1px solid $border-color;
+      font-size: 1rem;
+      color:#1b1e23;
+      background-image: url('../assets/search.png');
+      background-size: 1rem;
+      background-repeat: no-repeat;
+      background-position: left 0.5rem center;
+      outline: 0;
+      border-radius: 1rem;
+    }
   }
   
   .results {
     grid-column-start: 1;
-    grid-row-start: 3;
+    grid-row-start: 2;
   }
   
   .nominations {
     grid-column-start: 2;
-    grid-row-start: 3;
+    grid-row-start: 2;
   }
 
   .box {
@@ -126,23 +144,6 @@ main {
     font-size: 0.8rem;
     margin: 0.5rem;
     padding-left: 0.5rem;
-  }
-
-  // Search Bar 
-
-  input {
-    padding: 0.5rem;
-    padding-left: 2rem;
-    width: 100%;
-    border: 1px solid $border-color;
-    font-size: 1rem;
-    color: gray;
-    background-image: url('../assets/search.png');
-    background-size: 1rem;
-    background-repeat: no-repeat;
-    background-position: left 0.5rem center;
-    outline: 0;
-    border-radius: 1rem;
   }
 
   // Buttons
@@ -200,6 +201,24 @@ main {
       position: absolute;
       top: 0;
       left: 0;
+    }
+  }
+}
+
+// Footer
+
+footer {
+  color: $white;
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 1rem;
+
+  a {
+    color: $white;
+
+    &:hover,
+    &:visited {
+      color: $hover-color;
     }
   }
 }

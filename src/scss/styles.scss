@@ -7,8 +7,9 @@ body {
   background-color: $background-color;
   font-family: $primary-font;
   margin-left: calc(100vw - 100%);
-
 }
+
+// Header
 
 header {
   font-family: $header-font;
@@ -64,8 +65,10 @@ header {
   }
 }
 
-
 main {
+
+  // Flex Grid Layout
+
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto auto auto;
@@ -103,6 +106,8 @@ main {
     box-shadow: 1px 1px 3px $shadow-color;
   }
 
+  // Text
+
   h2 {
     font-weight: bold;
     margin: 0.5rem 0;
@@ -120,47 +125,71 @@ main {
   li {
     font-size: 0.8rem;
     margin: 0.5rem;
-    padding-left: 0.5rem;
   }
-}
 
-input {
-  padding: 0.5rem;
-  padding-left: 2rem;
-  width: 100%;
-  border: 1px solid $border-color;
-  font-size: 1rem;
-  color: gray;
-  background-image: url('../assets/search.png');
-  background-size: 1rem;
-  background-repeat: no-repeat;
-  background-position: left 0.5rem center;
-  outline: 0;
-  border-radius: 1rem;
-}
+  // Search Bar 
 
-button {
-  font-size: 0.8rem;
-  border: 1px solid $border-color;
-  border-radius: 0.2rem;
-  padding: 0.2rem 0.5rem;
-}
+  input {
+    padding: 0.5rem;
+    padding-left: 2rem;
+    width: 100%;
+    border: 1px solid $border-color;
+    font-size: 1rem;
+    color: gray;
+    background-image: url('../assets/search.png');
+    background-size: 1rem;
+    background-repeat: no-repeat;
+    background-position: left 0.5rem center;
+    outline: 0;
+    border-radius: 1rem;
+  }
 
-button:hover,
-button:active {
-  cursor: pointer;
-  background-color: $hover-color;
-}
+  // Buttons
 
-button:disabled {
-  cursor: not-allowed;
-  background-color: $shadow-color;
-}
+  button {
+    font-size: 0.8rem;
+    border: 1px solid $border-color;
+    border-radius: 0.2rem;
+    padding: 0.2rem 0.5rem;
 
-.banner {
-  background-color: $success-bg-color;
-  color: $success-font-color;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid $success-border-color;
+    &:hover,
+    &:active {
+      cursor: pointer;
+      background-color: $hover-color;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: $shadow-color;
+    }
+  }
+
+  // Banners
+
+  .banner {
+    background-color: $success-bg-color;
+    color: $success-font-color;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid $success-border-color;
+  }
+
+  // Loading Spinner
+
+  .loading {
+    position: relative;
+    margin: 0 1rem;
+
+    img {
+      height: 4rem;
+      width: auto;
+    }
+
+    #spinner {
+      animation: spin 2s linear infinite;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
 }

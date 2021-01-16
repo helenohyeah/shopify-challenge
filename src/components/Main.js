@@ -5,29 +5,46 @@ import Nominations from './Nominations.js';
 
 // Hooks
 import useSearch from '../hooks/useSearch.js';
+import useVisualMode from '../hooks/useVisualMode.js';
 
 export default function Main() {
 
+  // Modes
+  const EMPTY = 'EMPTY';
+  const LOADING = 'LOADING';
+  const RESULTS = 'RESULTS';
+  const ERROR = 'ERROR';
+
+  // Declare state
   const [searchValue, setSearchValue] = React.useState('');
   const [results, setResults] = React.useState([]);
   const [errMsg, setErrMsg] = React.useState('');
   const [nominations, setNominations] = React.useState([]);
-  const { handleSearch } = useSearch();
 
-  // update results when search terms change
+  // Initialize hooks
+  const { handleSearch } = useSearch();
+  const { mode, transition } = useVisualMode(EMPTY);
+  
+  // Update results when search terms change
   React.useEffect(() => {
-    // wait for user to stop typing before making api call
+    !searchValue ? transition(EMPTY) : transition(LOADING);
+
+    // Wait for user to stop typing before making api call
     const debounceTimer = setTimeout(() => {
-      handleSearch(searchValue)
-        .then(res => {
-          if(res.data.Response === 'True') {
-            setResults(res.data.Search);
-            setErrMsg('');
-          } else {
-            setResults([]);
-            setErrMsg(res.data.Error);
-          }
-        });
+      if(searchValue) {
+        handleSearch(searchValue)
+          .then(res => {
+            if(res.data.Response === 'True') {
+              setResults(res.data.Search);
+              setErrMsg('');
+              transition(RESULTS);
+            } else {
+              setResults([]);
+              setErrMsg(res.data.Error);
+              transition(ERROR);
+            }
+          });
+      }
     }, 1000);
 
     return () => clearTimeout(debounceTimer);
@@ -45,6 +62,7 @@ export default function Main() {
         error={errMsg}
         nominations={nominations}
         onNomination={setNominations}
+        mode={mode}
       />
       <Nominations
         nominations={nominations}

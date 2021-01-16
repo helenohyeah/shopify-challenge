@@ -1,6 +1,6 @@
 import { config } from '../config.js'
 
-export default function () {
+export default function useSearch() {
 
   function handleSearch(searchValue) {
     return axios.get('https://www.omdbapi.com/', {

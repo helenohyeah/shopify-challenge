@@ -31,7 +31,7 @@ Remove a nominee from the nomination list
 Improvements I'd like to work on next.
 
 - [x] Nicer custom design
-- [ ] Debounce search call
+- [x] Debounce search call
 - [ ] Animations
 - [ ] Save nomination list if user leaves the page
 - [ ] Shareable links

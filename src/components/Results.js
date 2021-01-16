@@ -22,9 +22,15 @@ export default function Results(props) {
   return (
     <div className="results box">
       <h2>{heading}</h2>
-      {!props.searchValue && <p>Start searching for movies you want to nominate!</p>}
-      {props.searchValue && props.error && <p>{props.error}</p>}
-      {resultsList && <ul>{resultsList}</ul>}
+      {props.mode === 'EMPTY' && <p>Start searching for movies you want to nominate!</p>}
+      {props.mode === 'LOADING' && 
+        <div className="loading">
+          <img src="../assets/film-reel-static.png"></img>
+          <img id="spinner" src="../assets/film-reel.png"></img>
+        </div>
+      }
+      {props.mode === 'ERROR' && <p>{props.error}</p>}
+      {props.mode === 'RESULTS' && <ul>{resultsList}</ul>}
     </div>
   );
 }

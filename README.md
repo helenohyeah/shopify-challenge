@@ -3,7 +3,7 @@ My submission for Shopify's Web Developer Intership Challenge
 
 Demo: [https://shopify-challenge-2021.netlify.app/](https://shopify-challenge-2021.netlify.app/)
 
-Build in React using Axios and Sass
+Build in React using Axios and Sass.
 
 ## The Challenge
 
@@ -28,11 +28,11 @@ Remove a nominee from the nomination list
 
 ## Extra Improvements
 
-Improvements I'd like to work on next.
+Improvements I'm going to work on next.
 
 - [x] Nicer custom design
 - [x] Debounce search call
-- [ ] Animations
+- [x] Animations
 - [ ] Save nomination list if user leaves the page
 - [ ] Shareable links
 - [ ] Automated testing

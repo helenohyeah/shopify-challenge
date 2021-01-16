@@ -33,9 +33,8 @@ Improvements I'm going to work on next.
 - [x] Nicer custom design
 - [x] Debounce search call
 - [x] Animations
-- [ ] Save nomination list if user leaves the page
-- [ ] Shareable links
-- [ ] Automated testing
+- [ ] ~~Save nomination list if user leaves the page~~
+- [ ] ~~Shareable links~~
 
 ## How to Run Locally
 

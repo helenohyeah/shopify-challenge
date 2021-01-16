@@ -1,3 +1,5 @@
+import Banner from './Banner.js';
+
 export default function Results(props) {
 
   // check if movie is nominated
@@ -29,7 +31,12 @@ export default function Results(props) {
           <img id="spinner" src="../assets/film-reel.png"></img>
         </div>
       }
-      {props.mode === 'ERROR' && <p>{props.error}</p>}
+      {props.mode === 'ERROR' && 
+        <Banner 
+          secondaryClass='warning'
+          content={props.error}
+        />
+      }
       {props.mode === 'RESULTS' && <ul>{resultsList}</ul>}
     </div>
   );
